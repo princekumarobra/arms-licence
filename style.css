@@ -1,0 +1,140 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- TOP BAR --- */
+.top-bar { background: #333; color: white; font-size: 12px; padding: 5px 0; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 15px; }
+
+/* --- HEADER --- */
+.gov-header { background: white; padding: 15px 0; border-bottom: 4px solid #ff9933; }
+.header-content { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; padding: 0 15px; }
+.emblem { height: 60px; margin-right: 15px; }
+.header-text h1 { margin: 0; color: #1a237e; font-size: 20px; font-weight: 700; }
+.header-text p { margin: 2px 0 0; color: #555; font-size: 12px; font-weight: bold; }
+.sb-logo { height: 50px; margin-left: auto; }
+
+/* --- NAVBAR --- */
+.navbar { background: #1a237e; text-align: center; padding: 0; }
+.navbar a { display: inline-block; color: white; padding: 12px 20px; text-decoration: none; font-weight: bold; font-size: 14px; }
+.navbar a:hover, .navbar a.active { background: #ff9933; }
+
+/* --- SEARCH SECTION --- */
+.search-section {
+    background: linear-gradient(135deg, #00b4db, #0083b0);
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.search-section h2 { margin: 0; font-size: 24px; }
+.input-box { margin-top: 20px; }
+input { padding: 12px; width: 250px; border: none; border-radius: 4px; font-size: 16px; }
+button { padding: 12px 25px; background: #ff9933; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; color: white; font-size: 16px; }
+
+/* --- CERTIFICATE PAPER --- */
+.paper {
+    background: white;
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 40px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Header Layout */
+.top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #000; padding-bottom: 15px; }
+.emblem-box img { height: 65px; }
+.title-box { text-align: center; flex-grow: 1; }
+.title-box h3 { margin: 0; font-size: 18px; text-transform: uppercase; color: #000; }
+.title-box p { margin: 4px 0; font-size: 12px; font-weight: bold; color: #333; }
+
+/* Photo */
+.photo-box { width: 110px; height: 130px; border: 3px solid black; padding: 2px; display: flex; justify-content: center; align-items: center; }
+.photo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Table */
+.licence-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.licence-table td { border: 1px solid black; padding: 10px; font-size: 14px; color: #000; }
+.licence-table .label { width: 35%; font-weight: bold; background-color: #f9f9f9; }
+.licence-table .value { font-weight: 500; text-transform: uppercase; }
+
+/* --- FOOTER --- */
+.main-footer { background: #0d1b3e; color: white; text-align: center; padding: 20px; margin-top: auto; border-top: 4px solid #ff9933; }
+.footer-links a { color: #ddd; text-decoration: none; font-size: 13px; margin: 0 5px; }
+.footer-content p { font-size: 12px; color: #bbb; margin: 10px 0 0; }
+
+/* Utils */
+.hidden { display: none !important; }
+.btn-print { background: green; color: white; padding: 10px 20px; border: none; border-radius: 4px; margin-right: 10px; }
+.btn-reset { background: red; color: white; padding: 10px 20px; border: none; border-radius: 4px; }
+.spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid white; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* =========================================
+   PRINT SETTINGS (100% WORKING FIX)
+   ========================================= */
+@media print {
+    /* 1. In sabko gayab kar do */
+    .top-bar, 
+    .gov-header, 
+    .navbar, 
+    .search-section, 
+    .main-footer, 
+    #btnDiv,
+    #loader {
+        display: none !important;
+    }
+
+    /* 2. Body ka margin hatao */
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    /* 3. Certificate ko dikhao aur set karo */
+    #printArea {
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 4. Paper ka border hatao (Print me clean dikhega) */
+    .paper {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+    }
+
+    /* 5. Colors Force Karo */
+    .photo-box {
+        border: 3px solid black !important;
+        -webkit-print-color-adjust: exact;
+    }
+    .licence-table .label {
+        background-color: #f9f9f9 !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+    .header-content { flex-direction: column; text-align: center; }
+    .emblem { margin: 0 0 10px 0; }
+    .sb-logo { display: none; }
+    .navbar a { display: block; border-bottom: 1px solid rgba(255,255,255,0.1); }
+}

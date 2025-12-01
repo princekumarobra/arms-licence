@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arms Licence Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar no-print">
+        <div class="container">
+            <span>भारत सरकार | Government of India</span>
+            <span style="float:right">Skip to Main Content | Language</span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="gov-header no-print">
+        <div class="header-content">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem" class="emblem">
+            <div class="header-text">
+                <h1>ARMS LICENCE ONLINE</h1>
+                <p>Ministry of Home Affairs, Government of India</p>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Swachh_Bharat_Abhiyan_logo.svg/1200px-Swachh_Bharat_Abhiyan_logo.svg.png" alt="Swachh Bharat" class="sb-logo">
+        </div>
+    </header>
+
+    <!-- NAVBAR -->
+    <nav class="navbar no-print">
+        <a href="#">HOME</a>
+        <a href="#">APPLY ONLINE</a>
+        <a href="#" class="active">SEARCH UIN</a>
+        <a href="#">RENEWAL</a>
+        <a href="#">CONTACT US</a>
+    </nav>
+
+    <!-- SEARCH -->
+    <div class="search-section no-print">
+        <h2>INDIVIDUAL SEARCH</h2>
+        <p>Enter Unique Identification Number (UIN) to view details</p>
+        <div class="input-box">
+            <input type="text" id="uinInput" placeholder="Enter UIN Number">
+            <button onclick="searchData()">SEARCH</button>
+        </div>
+        <div id="loader" class="hidden">
+            <div class="spinner"></div> Fetching Data...
+        </div>
+    </div>
+
+    <!-- PRINT AREA -->
+    <div id="printArea" class="hidden">
+        <div class="paper">
+            <div class="top-header">
+                <div class="emblem-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem">
+                </div>
+                <div class="title-box">
+                    <h3>ARMS LICENCE ALL INDIA PERMIT</h3>
+                    <p>GOVT OF INDIA</p>
+                    <p>ARMS LICENCE</p>
+                </div>
+                <div class="photo-wrapper">
+                    <div class="photo-box">
+                        <img id="res_photo" src="" alt="Photo">
+                    </div>
+                </div>
+            </div>
+
+            <table class="licence-table">
+                <tr><td class="label">UIN:</td><td id="res_uin" class="value"></td></tr>
+                <tr><td class="label">LICENCE NAME:</td><td id="res_name" class="value"></td></tr>
+                <tr><td class="label">FATHER/SPOUSE NAME:</td><td id="res_father" class="value"></td></tr>
+                <tr><td class="label">DATE OF BIRTH:</td><td id="res_dob" class="value"></td></tr>
+                <tr><td class="label">LICENCE NO:</td><td id="res_licno" class="value"></td></tr>
+                <tr><td class="label">AREA VALIDITY:</td><td id="res_area" class="value"></td></tr>
+                <tr><td class="label">ISSUING AUTHORITY:</td><td id="res_auth" class="value"></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div id="btnDiv" class="hidden no-print" style="text-align:center; margin: 30px 0;">
+        <!-- Print Button -->
+        <button onclick="window.print()" class="btn-print">PRINT PDF</button>
+        
+        <!-- Reset Button (Ab ye page reload nahi karega) -->
+        <button onclick="resetSearch()" class="btn-reset">RESET</button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer no-print">
+        <div class="footer-links">
+            <a href="#">Website Policies</a> | <a href="#">Help</a> | <a href="#">Contact Us</a> | <a href="#">Feedback</a>
+        </div>
+        <div class="footer-content">
+            <p>Content Owned and Maintained by Ministry of Home Affairs, Government of India</p>
+            <p>© 2025 National Informatics Centre (NIC). All Rights Reserved.</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="NIC" style="height:30px; filter: invert(1); opacity:0.5; margin-top:10px;">
+        </div>
+    </footer>t
+
+    <script src="main.js"></script>
+</body>
+</html>
