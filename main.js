@@ -6,38 +6,46 @@ async function searchData() {
   const loader = document.getElementById("loader");
   const printArea = document.getElementById("printArea");
   const btnDiv = document.getElementById("btnDiv");
-  
+
   // Reset old data
   printArea.classList.add("hidden");
   btnDiv.classList.add("hidden");
-  
+
   if (!inputVal) {
     alert("Please enter UIN Number");
     return;
   }
-  
+
   loader.classList.remove("hidden");
-  
+
   try {
     const response = await fetch(SHEET_API_URL);
     const data = await response.json();
-    
+
     // UIN Match
-    const result = data.find(row => String(row["UIN"]).trim() === String(inputVal).trim());
-    
+    const result = data.find(
+      row => String(row["UIN"]).trim() === String(inputVal).trim()
+    );
+
     if (result) {
+
       // Data Fill
-      document.getElementById("res_uin").textContent = result["UIN"];
-      document.getElementById("res_name").textContent = result["LICENCE NAME"];
-      document.getElementById("res_father").textContent = result["FATHER SPOUSE NAME"] || result["FATHER NAME"];
-      
+      document.getElementById("res_uin").textContent = result["UIN"] || "";
+      document.getElementById("res_name").textContent = result["LICENCE NAME"] || "";
+      document.getElementById("res_father").textContent =
+        result["FATHER SPOUSE NAME"] || result["FATHER NAME"] || "";
+
       let dob = result["DATE OF BIRTH"];
-      if (dob) document.getElementById("res_dob").textContent = String(dob).substring(0, 10);
-      
-      document.getElementById("res_licno").textContent = result["LICENCE NO"];
-      document.getElementById("res_area").textContent = result["AREA VALIDITY"];
-      
-      // Smart Authority Search
+      document.getElementById("res_dob").textContent = dob ? String(dob).substring(0,10) : "";
+
+      document.getElementById("res_licno").textContent = result["LICENCE NO"] || "";
+      document.getElementById("res_area").textContent = result["AREA VALIDITY"] || "";
+
+      // NEW COLUMN
+      document.getElementById("res_gunno").textContent = result["GUN NO"] || "";
+      document.getElementById("res_renewal").textContent = result["RENEWAL DATE"] || "";
+
+      // Authority
       let auth = result["ISSUING AUTHORITY"];
       if (!auth) {
         const allKeys = Object.keys(result);
@@ -45,28 +53,32 @@ async function searchData() {
         if (authKey) auth = result[authKey];
       }
       document.getElementById("res_auth").textContent = auth || "";
-      
-      // Photo Logic
+
+      // Photo
       const photoImg = document.getElementById("res_photo");
       let photoUrl = result["PHOTO"];
+
       if (photoUrl) {
         if (photoUrl.includes("drive.google.com")) {
           const idMatch = photoUrl.match(/\/d\/(.+?)\//);
-          if (idMatch) photoUrl = "https://lh3.googleusercontent.com/d/" + idMatch[1];
+          if (idMatch) {
+            photoUrl = "https://lh3.googleusercontent.com/d/" + idMatch[1];
+          }
         }
         photoImg.src = photoUrl;
         photoImg.style.display = "block";
       } else {
         photoImg.style.display = "none";
       }
-      
+
       // Show Result
       printArea.classList.remove("hidden");
       btnDiv.classList.remove("hidden");
+
     } else {
       alert("No Data Found for UIN: " + inputVal);
     }
-    
+
   } catch (error) {
     console.error(error);
     alert("Error! Check Internet.");
@@ -75,12 +87,12 @@ async function searchData() {
   }
 }
 
-// --- PRINT FUNCTION (Simple & Safe) ---
+// Print
 function printCertificate() {
   window.print();
 }
 
-// --- RESET FUNCTION (No Reload) ---
+// Reset
 function resetSearch() {
   document.getElementById("uinInput").value = "";
   document.getElementById("printArea").classList.add("hidden");
